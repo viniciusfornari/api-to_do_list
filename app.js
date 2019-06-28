@@ -1,6 +1,13 @@
-var express = require('express')
+var express = require('express');
+const mongoose = require ('mongoose');
 
-var app = express()
+mongoose.connect('mongodb://localhost:27017/capacitacao-api-unimetrocamp',{
+    useNewUrlParser: true
+});
+
+var app = express();
+
+app.use(express.json());
  
 app.use('/',require('./routes'));
  

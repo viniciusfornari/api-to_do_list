@@ -1,20 +1,26 @@
-const get = function(req,res){
-    const tasks = [
-        {
-            "title": "Amo a leticia paschoa da silva fornari ",
-            "description": "menina legalzinha"
-        },
-        {
-            "title":"hack da nasa ",
-            "description": "Estudar plano de invasão software"
-        }
-    ];
+const Task= require ('../models/Task');
 
-        res.send(tasks);
+const get = async function(req,res){
+try{
+    const tasks = await Task.find();
+
+    return res.send(tasks);
+
+}catch (error) {
+
+    return res.status(500).send('Erro ao buscar tarefas');
+    }
 }
+const create = async function(req,res){
+try {
 
-const create = function(req,res){
+    const task = await Task.create(req.body);
+    
+    return res.send(task);
 
+}catch (error) {
+    return res.status(500).send('Erro ao cadastrar tarefa');
+    }
 }
 
 const update = function(req,res){
